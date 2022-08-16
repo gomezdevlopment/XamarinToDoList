@@ -1,6 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XamarinToDoList.ViewModels"
              x:Class="XamarinToDoList.MainPage">
 
+    <ContentPage.BindingContext>
+        <local:ToDoListViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <Entry
+            x:Name="ToDoInput"
+            Text="{Binding ToDoInputValue}"
+            Placeholder="Enter a new todo item..."
+            ReturnCommand="{Binding AddToDoCommand}" />
+        <ListView x:Name="ToDoList" ItemsSource="{Binding ToDoItems}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label Text="{Binding ToDoText}" FontSize="Large" />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>
