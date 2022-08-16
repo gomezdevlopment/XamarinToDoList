@@ -27,5 +27,13 @@ namespace XamarinToDoList.ViewModels
         {
             ToDoItems.Add(new ToDoItem(1, ToDoInputValue, false));
         }
+
+        public ICommand DeleteToDoCommand => new Command(DeleteToDoItem);
+
+        private void DeleteToDoItem(object o)
+        {
+            ToDoItem toDoItemToDelete = o as ToDoItem;
+            ToDoItems.Remove(toDoItemToDelete);
+        }
     }
 }

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:XamarinToDoList.ViewModels"
+             xmlns:ffsvg="clr-namespace:FFImageLoading;assembly=FFImageLoading.Platform"
              x:Class="XamarinToDoList.MainPage">
 
     <ContentPage.BindingContext>
@@ -18,7 +19,14 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Label Text="{Binding ToDoText}" FontSize="Large" />
+                        <FlexLayout JustifyContent="SpaceBetween" AlignItems="Center">
+                            <Label Text="{Binding ToDoText}" FontSize="Large" />
+                            <ImageButton Source="trash.png"
+                                         Scale="0.5"
+                                         BackgroundColor="Red"
+                                         Command="{Binding Path=BindingContext.DeleteToDoCommand, Source={x:Reference ToDoList}}"
+                                         CommandParameter="{Binding .}" />
+                        </FlexLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
